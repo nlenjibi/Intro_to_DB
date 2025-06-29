@@ -2,12 +2,14 @@ import mysql.connector
 from mysql.connector import Error
 
 def create_database():
+    connection = None
+    cursor = None
     try:
         # Connect to MySQL server
         connection = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='yourpassword'  # Replace with your actual MySQL password
+            password=''  # Replace with your actual MySQL password if needed
         )
 
         if connection.is_connected():
@@ -19,8 +21,9 @@ def create_database():
         print(f"Error: {err}")
 
     finally:
-        if connection.is_connected():
+        if cursor:
             cursor.close()
+        if connection and connection.is_connected():
             connection.close()
 
 if __name__ == "__main__":
